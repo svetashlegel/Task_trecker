@@ -1,6 +1,6 @@
 from django.urls import path
 from employees.views import (EmployeeCreateAPIView, EmployeeListAPIView, EmployeeRetrieveAPIView, EmployeeUpdateAPIView,
-                             EmployeeDestroyAPIView)
+                             EmployeeDestroyAPIView, EngagedEmployeesListAPIView)
 
 from employees.apps import EmployeesConfig
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path("detail/<int:pk>/", EmployeeRetrieveAPIView.as_view(), name='employee_detail'),
     path("update/<int:pk>/", EmployeeUpdateAPIView.as_view(), name='employee_update'),
     path("delete/<int:pk>/", EmployeeDestroyAPIView.as_view(), name='employee_delete'),
+    path("engaged/", EngagedEmployeesListAPIView.as_view(), name='engaged_list'),
 ]

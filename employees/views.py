@@ -1,4 +1,5 @@
 from rest_framework import generics
+from django.db.models import Count
 
 from employees.models import Employee
 from employees.serializers import EmployeeSerializer
@@ -25,3 +26,8 @@ class EmployeeUpdateAPIView(generics.UpdateAPIView):
 
 class EmployeeDestroyAPIView(generics.DestroyAPIView):
     queryset = Employee.objects.all()
+
+
+class EngagedEmployeesListAPIView(generics.ListAPIView):
+    serializer_class = EmployeeSerializer
+    queryset = Employee.objects.filter(task__isnull=False).annotate(task_count=Count('task')).order_by('-task_count')
