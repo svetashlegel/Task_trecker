@@ -16,10 +16,10 @@ class ImportantTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['id', 'deadline', 'available_employee']
+        fields = ['id', 'title', 'deadline', 'available_employee']
 
     def get_available_employee(self, obj):
-        """Реализует поиск сотрудников джля выполнения важных задач"""
+        """Реализует поиск сотрудников джля выполнения важных задач."""
         available_emp = []
         base_task_executor = obj.base_task.executor
         employee = get_suitable_employee(base_task_executor)
