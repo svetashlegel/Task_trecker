@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from tasks.models import Task
-from tasks.serializers import TaskSerializer
+from tasks.serializers import TaskSerializer, ImportantTaskSerializer
 
 
 class TaskCreateAPIView(generics.CreateAPIView):
@@ -25,3 +25,14 @@ class TaskUpdateAPIView(generics.UpdateAPIView):
 
 class TaskDestroyAPIView(generics.DestroyAPIView):
     queryset = Task.objects.all()
+
+
+class ImportantTaskListAPIView(generics.ListAPIView):
+    """
+    Выводит список важных задач и возможных сотрудников для их выполнения.
+    Важные задачи - задачи, не взятые в работу, и от которых зависят другие
+    задачи, взятые в работу.
+    """
+
+    serializer_class = ImportantTaskSerializer
+    queryset = Task.objects.filter(executor__isnull=True, base_task__isnull=False, base_task__executor__isnull=False)
