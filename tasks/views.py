@@ -2,6 +2,7 @@ from rest_framework import generics
 
 from tasks.models import Task
 from tasks.serializers import TaskSerializer, ImportantTaskSerializer
+from tasks.paginators import TasksPaginator
 
 
 class TaskCreateAPIView(generics.CreateAPIView):
@@ -13,6 +14,7 @@ class TaskListAPIView(generics.ListAPIView):
     """Общий список задач."""
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
+    pagination_class = TasksPaginator
 
 
 class TaskRetrieveAPIView(generics.RetrieveAPIView):
@@ -41,3 +43,4 @@ class ImportantTaskListAPIView(generics.ListAPIView):
 
     serializer_class = ImportantTaskSerializer
     queryset = Task.objects.filter(executor__isnull=True, base_task__isnull=False, base_task__executor__isnull=False)
+    pagination_class = TasksPaginator
