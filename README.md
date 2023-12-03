@@ -13,7 +13,7 @@ The project allows you to maintain a database of company tasks, track deadlines 
 - Migrate your database using command: `python manage.py migrate`;
 
 ## Running
-To run the project, enter the `python manage.py runserver` command in the terminal. Open a second terminal window and enter `celery -A config worker -l INFO` (add `eventlet` for Windows). It is necessary to monitor and execute background tasks.
+To run the project, enter the `python manage.py runserver` command in the terminal.
 <br>The project is ready to use!
 
 ## Docker
